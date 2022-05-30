@@ -1,0 +1,62 @@
+
+.vector{
+    /* Vector */
+position: relative;
+left: 28.8%;
+right: 47.74%;
+top: 25.37%;
+bottom: 69.56%;
+
+background: rgba(255, 255, 255, 0.1);
+}
+.vector2{
+    position: relative;
+left: 28.8%;
+right: 47.74%;
+top: 31.16%;
+bottom: 63.77%;
+
+background: rgba(255, 255, 255, 0.1);
+}
+
+.count{
+    /* position: absolute;  */
+width: 84px;
+height: 22px;
+left: 15px;
+top: 68px;
+
+
+font-weight: 400;
+font-size: 15px;
+line-height: 22px;
+/* identical to box height, or 147% */
+
+letter-spacing: -0.408px;
+color: rgba(255, 255, 255, 0.5);
+
+}
+
+
+.count2{
+    /* 12 pokemons
+
+
+position: absolute;
+width: 90px;
+height: 22px;
+left: 15px;
+top: 68px;
+
+font-family: 'SF Pro Text';
+font-style: normal;
+font-weight: 400;
+font-size: 15px;
+line-height: 22px;
+/* identical to box height, or 147% */
+
+letter-spacing: -0.408px;
+
+color: rgba(255, 255, 255, 0.5);
+
+}

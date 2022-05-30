@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        font-family: Poppins, Helvetica, sans-serif;
+    }
+}
+body {
+    font-family: Poppins, Helvetica, sans-serif;
+}
+.pokemon-count {
+    letter-spacing: -0.408px;
+    color: rgba(255, 255, 255, 0.5);
+}
