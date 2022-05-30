@@ -33,8 +33,8 @@ const Favorites = () => {
                         })}
                     </div>
                 ) : (
-                    <div className="flex items-center">
-                        <span className="m-4 text-red-600 text-center text-xl">Je favoriete lijst is leeg ...</span>
+                    <div className="flex justify-center mt-5 border">
+                        <span className="m-4 text-white text-center text-xl italic">Je favoriete lijst is leeg ...</span>
                     </div>
                 )}
             </div>

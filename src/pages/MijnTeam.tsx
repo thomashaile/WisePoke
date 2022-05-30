@@ -32,8 +32,8 @@ const MyTeam = () => {
                     })}
                 </div>
             ) : (
-                <div className="flex items-center">
-                    <span className="m-4 text-red-600 text-xl">Jullie team Pokemon-lijst is leeg ...</span>
+                <div className="flex justify-center mt-5 border">
+                    <span className="m-4 text-white text-xl italic">Jullie team Pokemon-lijst is leeg ...</span>
                 </div>
             )}
         </div>

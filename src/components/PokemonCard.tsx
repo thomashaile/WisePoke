@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { PokemonDetailInfo } from '../types/types';
+import { PokemonDetailInfo, Type } from '../types/types';
 import { getBackgroundColorFromType, getPokemonImage } from '../pages/helpers/common';
 import { usePokdex } from './Context/Pokedex';
 
@@ -41,7 +41,7 @@ const PokemonCard = ({ pokemon, setError, id }: PokemonCardProps) => {
                 <div className="flex items-center justify-between gap-1">
                     <div className="flex-1 px-auto mr-1">
                         <div className="flex justify-end">
-                            {/*  {pokemon.types.map((type: Type, idx: number) => {
+                            {pokemon.types.map((type: Type, idx: number) => {
                                 return (
                                     <div
                                         key={idx}
@@ -51,7 +51,7 @@ const PokemonCard = ({ pokemon, setError, id }: PokemonCardProps) => {
                                         {type.type.name}
                                     </div>
                                 );
-                            })} */}
+                            })} 
                         </div>
                     </div>
                     <Link to={`pokemon/${id}`}>
