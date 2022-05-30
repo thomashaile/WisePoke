@@ -35,7 +35,7 @@ const Search = ({ onSearch }: SearchProps) => {
                 </svg>
             </div>
             {/* for screens */}
-            <button className="hidden text-white font-semibold absolute cursor-pointer right-2.5 bottom-2.5 bg-blue-400 hover:bg-blue-700 rounded-lg px-4 py-2 md:block" onClick={handleClick}>
+            <button className="hidden text-hite font-semibold absolute cursor-pointer right-2.5 bottom-2.5 bg-blue-400 hover:bg-blue-700 rounded-lg px-4 py-2 md:block" onClick={handleClick}>
                 Search
             </button>
         </div>

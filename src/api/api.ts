@@ -1,5 +1,4 @@
 import { getPokemon } from './ApiService';
-import { PokemonDetailInfo } from '../types/types';
 
 /** Endponits */
 const baseUrl = 'https://stoplight.io/mocks/appwise-be/pokemon/57519009/pokemon';

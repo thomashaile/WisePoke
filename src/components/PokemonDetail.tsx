@@ -20,23 +20,43 @@ const PokemonDetail = (): JSX.Element => {
     const { favorites, setFavorites, themeColor, selectedPokemon } = usePokdex();
 
     const [pokemon, setPokemon] = useState<PokemonDetailInfo | any>([]);
-    const [about, setAbout] = useState<any>('');
+    const [id, setId] = useState<string | undefined>(pokemonIndex);
+    const [about, setAbout] = useState<any>('No Information');
     const [template, setTemplates] = useState<string>(themeColor);
     const [loading, setLoading] = useState<boolean>(false);
     const [notFound, setNotFound] = useState<boolean>(false);
-    const [skills, setSkills] = useState<any>('');
+    const [skills, setSkills] = useState<any>('Not found');
     const [geslacht, setGeslacht] = useState<string>('Undfined');
-    const [move, setMove] = useState<any[]>([]);
+    const [moveSet, setMoveSet] = useState<any[]>([]);
     const [err, setErr] = useState<string>();
 
     //Check if it's in my favorites list
     const isInFavorite = favorites.some((e) => e.id === pokemon?.id) ? true : false;
 
     useEffect(() => {
-        //setPokemon(selectedPokemon);
-        getPokemonProfile();
-        getAdditionalInfo();
+        async function fetchData() {
+            try {
+                 if (selectedPokemon) {
+                    setPokemon(selectedPokemon);
+                    return;
+                }else{
+                    //We can await here
+                    const response = await loadNewData();
+                    response ? setPokemon(response) : setErr('Unable to get new data');
+                    return;
+                }   
+             }catch (err) {
+                setErr('Something went wrong when gettingPokemonInfo');
+            }
+        }
+        // ...
+        fetchData();
     }, []);
+
+    useEffect(() => {
+       getAdditionalInfo();
+    },[]);
+
 
     const getPokemonProfile = async () => {
         try {
@@ -55,7 +75,7 @@ const PokemonDetail = (): JSX.Element => {
 
     const getAdditionalInfo = async () => {
         try {
-            //get geslacht =
+            //Geslacht =
             const geslacht = await getPokemonDetail(`gender/${pokemonIndex}`);
             geslacht ? setGeslacht(geslacht.name) : setErr('Unable to get geneder type');
 
@@ -74,7 +94,7 @@ const PokemonDetail = (): JSX.Element => {
             //Vaardigheden =
             formattedSkills(pokemon.abilities) ? setSkills(formattedSkills(pokemon.abilities)) : setErr('unable to get skills');
             //Move set =
-            setMove(getFormattedMoveSets(pokemon.moves));
+            setMoveSet(getFormattedMoveSets(pokemon.moves));
         } catch (err) {
             setErr('Something went wrong when getting additionaInfo');
         }
@@ -83,19 +103,20 @@ const PokemonDetail = (): JSX.Element => {
     //Request new pokemon data
     const loadNewData = async () => {
         try {
-            const data = await getPokemonDetail(`pokemon/${pokemonIndex}`);
+            const data = await getPokemonDetail(`pokemon/${id}`);
             return data;
         } catch (err) {
             setErr('Error fetching Pokemon profile');
         }
     };
+
     const handleFavorite = () => {
         setFavorites(pokemon);
     };
 
     return (
         <div className="w-full min-h-screen mx-auto" style={{ backgroundColor: `#${template}` }}>
-            <PokemonDetailPage id={pokemon.id} pokemon={pokemon} geslacht={geslacht} type={pokemon.types} skills={skills} about={about} />
+            <PokemonDetailPage id={pokemon.id} pokemon={pokemon} geslacht={geslacht} moveSet={moveSet} type={pokemon.types} skills={skills} about={about} />
         </div>
     );
 };

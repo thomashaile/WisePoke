@@ -37,10 +37,6 @@ const Home = ({ favoriteCount, mijnTeamListCount }: HomeProps): JSX.Element => {
         }
     };
 
-    const handleSelect = (pokemonId: any) => {
-        setPokemonSelected(pokemons.filter((p) => p.id === pokemonId)[0]);
-    };
-
     const onSearch = (value: any) => {
         try {
             if (!value) {
@@ -72,7 +68,7 @@ const Home = ({ favoriteCount, mijnTeamListCount }: HomeProps): JSX.Element => {
                     <h1 className="text-5xl">Pokemon</h1>
                 </header>
                 <Search onSearch={onSearch} />
-                <Dashboard favoriteCount={favoriteCount} mijnTeamListCount={mijnTeamListCount} setError={setError} />
+                <Dashboard favoriteCount={favoriteCount} mijnTeamListCount={mijnTeamListCount} />
             </div>
             <div className="min-h-screen flex-1 flex flex-col mx-4 md:mx-6 md:space-y-4">
                 {notFound ? (
@@ -80,7 +76,7 @@ const Home = ({ favoriteCount, mijnTeamListCount }: HomeProps): JSX.Element => {
                         <span>No search results found... </span>
                     </div>
                 ) : (
-                    <Main pokemonList={filteredPokeList.length ? filteredPokeList : pokemons} handleSelect={handleSelect} loading={loading} setError={setError} />
+                    <Main pokemonList={filteredPokeList.length ? filteredPokeList : pokemons} loading={loading} />
                 )}
             </div>
         </div>

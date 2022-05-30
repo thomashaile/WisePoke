@@ -5,13 +5,13 @@ import { getBackgroundColorFromType, getPokemonImage } from '../pages/helpers/co
 import { usePokdex } from './Context/Pokedex';
 
 export interface PokemonCardProps {
-    pokemon: PokemonDetailInfo | any;
-    handleSelect?: (id: any) => void;
+    pokemon: any;
     id: number;
     setError?: (err: string) => {};
 }
 
 const PokemonCard = ({ pokemon, setError, id }: PokemonCardProps) => {
+ // console.log(typeof pokemon, " orrr ")
     let navigate = useNavigate();
 
     const { setThemeColor, selectedPokemon, setSelectedPokemon } = usePokdex();
@@ -28,7 +28,7 @@ const PokemonCard = ({ pokemon, setError, id }: PokemonCardProps) => {
 
     return (
         <div key={id} className="my-1 mx-1 flex rounded-md bg-white p-2 text-black shadow">
-            <div className="flex w-full justify-between py-1 pr-2">
+            <div className="flex shrink-0 w-full justify-between py-2 pr-2">
                 <div className="flex flex-row">
                     <div className="mt-1">
                         <img className="w-20 object-cover" src={`${getPokemonImage(id)}`} alt="" />

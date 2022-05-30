@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { usePokdex } from '../components/Context/Pokedex';
-import { isPokemonInDelist } from './helpers/common';
 
 interface Props {
     favorite?: boolean;

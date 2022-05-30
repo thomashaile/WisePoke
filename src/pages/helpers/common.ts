@@ -46,7 +46,7 @@ export function formattedSkills(abilities: any[]) {
                 .join(' ');
         })
         .join(', ');
-    return skills;
+    return skills ? skills : false;
 }
 
 //Check if pokemon is in favorites or Myteam list
@@ -59,7 +59,7 @@ export function getFormattedMoveSets(move: any[]) {
     let colors = ['#4B0082', '#00FF00', '#00FF01', '#FFFF00'];
     let moveSets: any = [];
     //To pick 4 random moves
-    for (let i = 0; i <= 3; i++) {
+    for (let i = 1; i <= 4; i++) {
         //Math.floor(Math.random() * (max - min +1)) + 1;
         let ranInt = Math.floor(Math.random() * (9 - 2)) + 1;
         moveSets.push({ color: colors[i], level: move[ranInt].move.name });
