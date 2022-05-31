@@ -89,10 +89,12 @@ function App() {
             <Router>
                 <div className="w-full">
                     <Routes>
+                        {/* needs rewrite repetitive paths*/}
                         <Route path="/" element={<Home favoriteCount={favorites.length} mijnTeamListCount={teamList.length} />} />
                         <Route path="/mijnTeam" element={<MyTeam />} />
                         <Route path="/favorieten" element={<Favorites />} />
                         <Route path="/favorieten/pokemon/:pokemonIndex" element={<PokemonDetail />} />
+                        <Route path="/mijnTeam/pokemon/:pokemonIndex" element={<PokemonDetail />} />
                         <Route path="/pokemon/:pokemonIndex" element={<PokemonDetail />} />
                         <Route path="*" element={<ErrorPage />} />
                     </Routes>
