@@ -14,7 +14,7 @@ export interface PokemonDetailInfo {
     base_experience: number;
     forms: Form[];
     height: number;
-    id: number;
+    id: number | string;
     is_default: boolean;
     location_area_encounters: string;
     moves: Move[];

@@ -54,6 +54,11 @@ export function isPokemonInDelist(arr: any[], item: any) {
     let inList = arr.some((e) => e.id === item) ? true : false;
     return inList;
 }
+//Check generate random number 1-151
+export function getRandomNumber(){
+    let ranInt = Math.floor(Math.random() * (151 - 2)) + 1;
+    return ranInt;
+}
 
 export function getFormattedMoveSets(move: any[]) {
     let colors = ['#4B0082', '#00FF00', '#00FF01', '#FFFF00'];

@@ -9,7 +9,7 @@ interface DashboardProps {
 
 function Dashboard({ favoriteCount, mijnTeamListCount }: DashboardProps) {
     return (
-        <div className="grid grid-cols-2 gap-1">
+        <div className="h-32 flex gap-2">
             <DashboardBox text={'Mijn Team'} count={mijnTeamListCount} navLink={'/mijnTeam'} style={styleMijnTeam.divStyle} />
             <DashboardBox text={'Favorieten'} count={favoriteCount} navLink={'/favorieten'} style={styleFavorieten.divStyle} />
         </div>

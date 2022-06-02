@@ -19,14 +19,15 @@ const MyTeam = () => {
         setPokemons(myTeamList);
         setLoading(false);
     };
+  
     return (
-        <div className="w-full min-h-screen bg-gradient-to-r from-[#46469C] to-[#7E32E0] px-3 p-3 md:px-20">
+        <div className="flex-1 realtive min-h-screen bg-gradient-to-r from-[#46469C] to-[#7E32E0] px-3 p-3 md:px-20">
             <Nav />
             <h1 className="py-2 pl-5 text-white font-semibold text-3xl">Mijn team</h1>
             {loading ? (
                 <Loading />
             ) : pokemons.length > 0 ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 m-3">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 m-3">
                     {pokemons.map((pokemon: Pokemon) => {
                         return <PokemonCard pokemon={pokemon} id={pokemon.id} />;
                     })}

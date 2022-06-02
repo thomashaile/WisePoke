@@ -15,8 +15,8 @@ const DashboardBox = ({ navLink, text, count, style }: BoxProps): JSX.Element =>
 
     return (
         <div className={style} onClick={handleClick}>
-            <p className="font-bold text-2xl text-white text-base tracking-tight md:text-4xl">{text}</p>
-            <p className="pokemon-count text-xl mb-3 md:text-2xl">{count ? (count > 1 ? `${count} Pokemons` : `${count} Pokemon`) : 'No saved pokemons'}</p>
+            <p className="font-bold text-[1.25rem] text-white leading-8">{text}</p>
+            <p className="text-gray-300 text-xl mb-3 font-light leading-6">{count ? (count > 1 ? `${count} Pokemons` : `${count} Pokemon`) : 'No saved pokemons'}</p>
         </div>
     );
 };

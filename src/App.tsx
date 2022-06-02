@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, Outlet } from 'react-router-dom';
 import { PokemonContext } from './components/Context/Pokedex';
-import Home from './components/Home';
 import MyTeam from './pages/MijnTeam';
 import Favorites from './pages/Favorites';
-import ErrorPage from './pages/ErrorPage';
+import ErrorPage from './pages/ErrorPage'; 
 import './styles.css';
-import { Pokemon } from './types/types';
+import { Pokemon, PokemonDetailInfo } from './types/types';
 import PokemonDetail from './components/PokemonDetail';
+import Home from './components/Home';
+import SidePage from './components/SidePage';
+import DetailPage from './components/DetailPage';
 
 export enum Store {
     myFavorites = 'My favorites',
@@ -15,10 +17,12 @@ export enum Store {
 }
 
 function App() {
+    const [pokemonList, setPokemonList] = useState<any[]>([]);
     const [favorites, setFavorites] = useState<Pokemon[]>([]);
     const [teamList, setTeamList] = useState<Pokemon[]>([]);
     const [themeColor, setThemeColor] = useState<string>('');
-    const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | string>();
+    const [isDefaultPage, setIsDefaultPage] = useState<boolean>(true);
+    const [selectedPokemon, setSelectedPokemon] = useState<any>([]);
 
     useEffect(() => {
         loadMyFavoritePokemons();
@@ -64,6 +68,14 @@ function App() {
         setTeamList(updateList);
         window.localStorage.setItem(Store.myTeamList, JSON.stringify(updateList));
     };
+    const updatePokemons = (pokemon: any[]) => {
+        if (pokemon.length > 0) {
+            setPokemonList(pokemon);
+        }
+    };
+    const changePage = (page: boolean)=>{
+        setIsDefaultPage(page);
+    }
 
     const changeSelectedPokemon = (pokemon: any) => {
         setSelectedPokemon(pokemon);
@@ -80,25 +92,31 @@ function App() {
                 teamList,
                 selectedPokemon,
                 themeColor,
+                pokemonList,
+                isDefaultPage,
+                setDefaultPage:changePage,
+                setPokemonList:updatePokemons,
                 setFavorites: updateFavoritePokemons,
                 setTeamList: updateTeamPokemons,
                 setThemeColor: changeThemeColor,
                 setSelectedPokemon: changeSelectedPokemon
             }}
-        >
+        >  
             <Router>
-                <div className="w-full">
-                    <Routes>
-                        {/* needs rewrite repetitive paths*/}
-                        <Route path="/" element={<Home favoriteCount={favorites.length} mijnTeamListCount={teamList.length} />} />
+                
+        <div className="flex min-h-screen bg-gray-200 font-sans">
+             <div className="flex flex-cols flex-wrap flex-1 flex-grow content-start pl-2">
+                <SidePage favoriteCount={favorites.length} mijnTeamListCount={teamList.length}/>
+                <Routes>
+                        <Route path="/" element={<Home />} />
                         <Route path="/mijnTeam" element={<MyTeam />} />
                         <Route path="/favorieten" element={<Favorites />} />
-                        <Route path="/favorieten/pokemon/:pokemonIndex" element={<PokemonDetail />} />
-                        <Route path="/mijnTeam/pokemon/:pokemonIndex" element={<PokemonDetail />} />
-                        <Route path="/pokemon/:pokemonIndex" element={<PokemonDetail />} />
+                        <Route path="/favorieten/pokemon/:pokemonIndex" element={<DetailPage />} /> 
+                        <Route path="/mijnTeam/pokemon/:pokemonIndex" element={<DetailPage />} />
+                        <Route path="/pokemon/:pokemonIndex" element={<DetailPage />} />
                         <Route path="*" element={<ErrorPage />} />
                     </Routes>
-                </div>
+                </div> </div>
             </Router>
         </PokemonContext.Provider>
     );

@@ -20,7 +20,7 @@ const Favorites = () => {
         setLoading(false);
     };
     return (
-        <div className="w-full md:py-10 min-h-screen bg-gradient-to-r from-[#65CB9A] to-[#15D0DC] md:px-5 p-3">
+        <div className="flex-1 realtive md:py-10 min-h-screen bg-gradient-to-r from-[#65CB9A] to-[#15D0DC] md:px-5 p-3">
             <Nav />
             <h1 className="py-2 pl-5 text-white font-semibold text-3xl">Favorieten</h1>
             <div className="flex-1 flex flex-col mx-4 md:mx-3 md:space-y-4">
