@@ -6,9 +6,9 @@ interface ProgressProps {
 }
 const ProgressBar = ({ progressPercentage, label }: ProgressProps) => {
     return (
-        <div className="flex items-center flex-row mx-3 my-1 gap-3">
+        <div className="flex items-center flex-row mx-3 overflow-clip my-1 gap-3">
             <p className="w-20 text-gray-500 font-xl text-md capitalize">{label}</p>
-            <div className="h-2.5 w-full bg-gray-300">
+            <div className="h-2.5 flex-1 bg-gray-300">
                 <div style={{ width: `${progressPercentage}%` }} className={`h-full ${progressPercentage < 50 ? 'bg-red-600' : 'bg-green-600'}`}></div>
             </div>
         </div>

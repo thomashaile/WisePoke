@@ -7,7 +7,7 @@ const PokemonStatstieken = ({baseStats}: CardProps) => {
     <div className="flex flex-col items-left m-3"> 
       <p className="ml-3 text-white font-semibold text-lg uppercase">statistieken</p>             
       <div className="rounded-lg justify-between shadow-lg bg-white mt-1">
-            <div className="w-full flex flex-col my-3">
+            <div className="flex flex-col my-3">
                 {baseStats.length ? baseStats.map((stat: any, index: any) => {
                     return (
                         <div key={index}>

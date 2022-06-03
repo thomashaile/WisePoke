@@ -6,7 +6,7 @@ interface SearchProps {
 
 const Search = ({ onSearch }: SearchProps) => {
     
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e:any) => {
         if (e.currentTarget.value.length === 0) {
         onSearch(null);
         }

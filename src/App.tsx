@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, Outlet } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { PokemonContext } from './components/Context/Pokedex';
-import MyTeam from './pages/MijnTeam';
-import Favorites from './pages/Favorites';
-import ErrorPage from './pages/ErrorPage'; 
+import MyTeam from './components/NewPages/MijnTeam';
+import Favorites from './components/NewPages/Favorites';
+import ErrorPage from './components/NewPages/ErrorPage'; 
 import './styles.css';
 import { Pokemon, PokemonDetailInfo } from './types/types';
-import PokemonDetail from './components/PokemonDetail';
-import Home from './components/Home';
-import SidePage from './components/SidePage';
-import DetailPage from './components/DetailPage';
+import DetailPage from './components/NewPages/DetailPage';
+import HomePage from './components/NewPages/HomePage';
+import Sidebar from './components/NewPages/Sidebar';
 
 export enum Store {
     myFavorites = 'My favorites',
@@ -17,12 +16,11 @@ export enum Store {
 }
 
 function App() {
-    const [pokemonList, setPokemonList] = useState<any[]>([]);
-    const [favorites, setFavorites] = useState<Pokemon[]>([]);
-    const [teamList, setTeamList] = useState<Pokemon[]>([]);
-    const [themeColor, setThemeColor] = useState<string>('');
+
+    const [favorites, setFavorites] = useState<PokemonDetailInfo[]>([]);
+    const [teamList, setTeamList] = useState<PokemonDetailInfo[]>([]);
+    const [pokemonList, setPokemonList] = useState<PokemonDetailInfo[] | any>([]);
     const [isDefaultPage, setIsDefaultPage] = useState<boolean>(true);
-    const [selectedPokemon, setSelectedPokemon] = useState<any>([]);
 
     useEffect(() => {
         loadMyFavoritePokemons();
@@ -68,55 +66,39 @@ function App() {
         setTeamList(updateList);
         window.localStorage.setItem(Store.myTeamList, JSON.stringify(updateList));
     };
-    const updatePokemons = (pokemon: any[]) => {
-        if (pokemon.length > 0) {
-            setPokemonList(pokemon);
-        }
-    };
+    const updatePokemonList = (pokemon: PokemonDetailInfo[])=>{
+        setPokemonList(pokemon);
+    }
     const changePage = (page: boolean)=>{
         setIsDefaultPage(page);
     }
-
-    const changeSelectedPokemon = (pokemon: any) => {
-        setSelectedPokemon(pokemon);
-    };
-
-    const changeThemeColor = (color: string) => {
-        setThemeColor(color);
-    };
 
     return (
         <PokemonContext.Provider
             value={{
                 favorites,
                 teamList,
-                selectedPokemon,
-                themeColor,
-                pokemonList,
                 isDefaultPage,
+                pokemonList,
                 setDefaultPage:changePage,
-                setPokemonList:updatePokemons,
                 setFavorites: updateFavoritePokemons,
+                setPokemonList:updatePokemonList,
                 setTeamList: updateTeamPokemons,
-                setThemeColor: changeThemeColor,
-                setSelectedPokemon: changeSelectedPokemon
             }}
         >  
-            <Router>
-                
-        <div className="flex min-h-screen bg-gray-200 font-sans">
-             <div className="flex flex-cols flex-wrap flex-1 flex-grow content-start pl-2">
-                <SidePage favoriteCount={favorites.length} mijnTeamListCount={teamList.length}/>
+            <Router>   
+            <div className="flex h-screen overflow-hidden">
+                <Sidebar />
                 <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/mijnTeam" element={<MyTeam />} />
+                        <Route path="/" element={<HomePage/>} />
                         <Route path="/favorieten" element={<Favorites />} />
+                        <Route path="/mijnTeam" element={<MyTeam/>} />
                         <Route path="/favorieten/pokemon/:pokemonIndex" element={<DetailPage />} /> 
                         <Route path="/mijnTeam/pokemon/:pokemonIndex" element={<DetailPage />} />
                         <Route path="/pokemon/:pokemonIndex" element={<DetailPage />} />
                         <Route path="*" element={<ErrorPage />} />
                     </Routes>
-                </div> </div>
+            </div>
             </Router>
         </PokemonContext.Provider>
     );

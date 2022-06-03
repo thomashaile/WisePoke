@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Pokemon } from '../types/types';
-import PokemonCard from '../components/PokemonCard';
+import { Pokemon } from '../../types/types';
+import PokemonCard from './PokemonCard';
 import Nav from './Nav';
-import { Store } from '../App';
+import { Store } from '../../App';
 import Loading from './Loading';
 
 const Favorites = () => {
