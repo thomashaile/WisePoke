@@ -11,52 +11,53 @@ import Loading from './Loading';
 import DetailContentPane from './DetailContentPane';
 
 function HomePage() {
-  const { isDefaultPage, pokemonList, setPokemonList } = usePokdex();
-  const [pokemon, setPokemon] = useState<PokemonDetailInfo | any>();
-  const [pokemonInfo, setPokemonInfo] = useState<PokemonDetailInfo | any>();
-  const [id, setId] = useState<number | string>('');
-  const [loading, setLoading] = useState<boolean>(true);
-  const [theme, setTheme] = useState<string>('c9c9c9'); //default
-  const [error, setError] = useState<string>('');
+    const { isDefaultPage, pokemonList, setPokemonList } = usePokdex();
+    const [pokemon, setPokemon] = useState<PokemonDetailInfo | any>();
+    const [pokemonInfo, setPokemonInfo] = useState<PokemonDetailInfo | any>();
+    const [id, setId] = useState<number | string>('');
+    const [loading, setLoading] = useState<boolean>(true);
+    const [theme, setTheme] = useState<string>('c9c9c9'); //default
+    const [error, setError] = useState<string>('');
 
+    useEffect(() => {
+        setId(getRandomNumber());
+        loadNewData();
+    }, []);
 
- useEffect(() => {
-    setId(getRandomNumber());
-    loadNewData();
-  },[])
- 
-  let color = getBackgroundColorFromType(pokemon?.types[pokemon.types.length - 1].type.name);
+    let color = getBackgroundColorFromType(pokemon?.types[pokemon.types.length - 1].type.name);
 
-  const getAdditionalInfo = async(pokemonIndex:any) => {
-  const data = await getPokemonDetail(`pokemon-species/${pokemonIndex}`);
-  return data;
-}
+    const getAdditionalInfo = async (pokemonIndex: any) => {
+        const data = await getPokemonDetail(`pokemon-species/${pokemonIndex}`);
+        return data;
+    };
 
-const loadAllPokemons = async() => {
-  const data = await getAllPokemonsData();
-  setPokemonList(data);
-  return data;
-}
+    const loadAllPokemons = async () => {
+        const data = await getAllPokemonsData();
+        setPokemonList(data);
+        return data;
+    };
+    const getEvolutions = async (url: string) => {
+        //To Do
+        //Get evolution using evolution_chain url here
+    };
+    const loadNewData = async () => {
+        setLoading(true);
+        let rundomNumber = getRandomNumber();
+        const results = await loadAllPokemons();
+        let selectedPokemon = results.find((p) => {
+            return p.id === rundomNumber;
+        });
+        const moreinfo = await getAdditionalInfo(rundomNumber);
+        setPokemon(selectedPokemon);
+        setPokemonInfo(moreinfo);
+        setLoading(false);
+    };
 
-const loadNewData = async () => {
-  setLoading(true);
-  let rundomNumber = getRandomNumber();
-    const results = await loadAllPokemons();
-    let selectedPokemon = results.find((p) => {
-      return p.id === rundomNumber;
-    })
-    const moreinfo = await getAdditionalInfo(rundomNumber);
-    setPokemon(selectedPokemon);
-    setPokemonInfo(moreinfo);
-    setLoading(false);
-  }
-
-  return (
-      <div className={`relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden`} style={{ backgroundColor: `#${color}` }}>
-        {pokemon ? 
-        <DetailContentPane pokemon={pokemon} pokemonInfo={pokemonInfo} loading={loading}/>: null} 
-      </div>
-  );
+    return (
+        <div className={`max-h-screen md:flex flex-col flex-1 overflow-hidden`} style={{ backgroundColor: `#${color}` }}>
+            {pokemon ? <DetailContentPane pokemon={pokemon} pokemonInfo={pokemonInfo} loading={loading} /> : null}
+        </div>
+    );
 }
 
 export default HomePage;

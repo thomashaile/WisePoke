@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { PokemonContext } from './components/Context/Pokedex';
 import MyTeam from './components/NewPages/MijnTeam';
 import Favorites from './components/NewPages/Favorites';
-import ErrorPage from './components/NewPages/ErrorPage'; 
+import ErrorPage from './components/NewPages/ErrorPage';
 import './styles.css';
 import { Pokemon, PokemonDetailInfo } from './types/types';
 import DetailPage from './components/NewPages/DetailPage';
@@ -16,7 +16,6 @@ export enum Store {
 }
 
 function App() {
-
     const [favorites, setFavorites] = useState<PokemonDetailInfo[]>([]);
     const [teamList, setTeamList] = useState<PokemonDetailInfo[]>([]);
     const [pokemonList, setPokemonList] = useState<PokemonDetailInfo[] | any>([]);
@@ -66,12 +65,12 @@ function App() {
         setTeamList(updateList);
         window.localStorage.setItem(Store.myTeamList, JSON.stringify(updateList));
     };
-    const updatePokemonList = (pokemon: PokemonDetailInfo[])=>{
+    const updatePokemonList = (pokemon: PokemonDetailInfo[]) => {
         setPokemonList(pokemon);
-    }
-    const changePage = (page: boolean)=>{
+    };
+    const changePage = (page: boolean) => {
         setIsDefaultPage(page);
-    }
+    };
 
     return (
         <PokemonContext.Provider
@@ -80,25 +79,25 @@ function App() {
                 teamList,
                 isDefaultPage,
                 pokemonList,
-                setDefaultPage:changePage,
+                setDefaultPage: changePage,
                 setFavorites: updateFavoritePokemons,
-                setPokemonList:updatePokemonList,
-                setTeamList: updateTeamPokemons,
+                setPokemonList: updatePokemonList,
+                setTeamList: updateTeamPokemons
             }}
-        >  
-            <Router>   
-            <div className="flex h-screen overflow-hidden">
-                <Sidebar />
-                <Routes>
-                        <Route path="/" element={<HomePage/>} />
+        >
+            <Router>
+                <div className="flex h-screen w-screen overflow-hidden font-['SF Pro Display'] bg-gray-100">
+                    <Sidebar />
+                    <Routes>
+                        <Route path="/" element={<HomePage />} />
                         <Route path="/favorieten" element={<Favorites />} />
-                        <Route path="/mijnTeam" element={<MyTeam/>} />
-                        <Route path="/favorieten/pokemon/:pokemonIndex" element={<DetailPage />} /> 
+                        <Route path="/mijnTeam" element={<MyTeam />} />
+                        <Route path="/favorieten/pokemon/:pokemonIndex" element={<DetailPage />} />
                         <Route path="/mijnTeam/pokemon/:pokemonIndex" element={<DetailPage />} />
                         <Route path="/pokemon/:pokemonIndex" element={<DetailPage />} />
                         <Route path="*" element={<ErrorPage />} />
                     </Routes>
-            </div>
+                </div>
             </Router>
         </PokemonContext.Provider>
     );

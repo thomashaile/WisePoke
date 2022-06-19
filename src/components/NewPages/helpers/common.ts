@@ -28,6 +28,11 @@ export function getBackgroundColorFromType(type: string) {
     const colorCode = Colors[type as keyof typeof Colors];
     return colorCode;
 }
+export function getFormattedNumber(num:number | string) {
+        num = num.toString();
+        while (num.length < 3) num = "0" + num;
+        return num;
+}
 
 export function getPokemonImage(index: any) {
     //console.log(index);
@@ -61,10 +66,10 @@ export function getRandomNumber(){
 }
 
 export function getFormattedMoveSets(move: any[]) {
-    let colors = ['#4B0082', '#00FF00', '#00FF01', '#FFFF00'];
+    let colors = ['#4f46e5', '#34d399', '#4f46e5', '#ca8a04'];
     let moveSets: any = [];
     //To pick 4 random moves
-    for (let i = 1; i <= 4; i++) {
+    for (let i = 0; i < 4; i++) {
         //Math.floor(Math.random() * (max - min +1)) + 1;
         let ranInt = Math.floor(Math.random() * (9 - 2)) + 1;
         moveSets.push({ color: colors[i], level: ranInt, name: move[ranInt].move.name });

@@ -1,17 +1,15 @@
-import React from 'react'
+import React from 'react';
 
-type Props = {}
+type Props = {};
 
 const PokemonEvolutie = (props: Props) => {
-  return (
-    <div className="flex flex-col items-left m-3"> 
-    <p className="ml-3 text-white font-semibold text-lg uppercase">Evolutie</p>             
+    return (
+        <div className="flex flex-col items-left mt-3 space-y-1">
+            <p className="ml-3 text-white font-semibold text-lg uppercase">Evolutie</p>
+            <div className="w-sm h-24 bg-white rounded-xl shadow-lg flex items-center ">{/** pokemon cards */}</div>
+            <div className="w-sm h-24 bg-white rounded-xl shadow-lg flex items-center ">{/** pokemon cards */}</div>
+        </div>
+    );
+};
 
-    <div className="grid grid-cols-2 gap-x-px md:grid-cols-4 rounded-lg items-center justify-center shadow-lg bg-white m-1 p-1">
-   
-    </div>
-   </div>
-  )
-}
-
-export default PokemonEvolutie
+export default PokemonEvolutie;

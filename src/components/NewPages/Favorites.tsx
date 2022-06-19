@@ -20,14 +20,14 @@ const Favorites = () => {
         setLoading(false);
     };
     return (
-        <div className="flex-1 realtive md:py-10 min-h-screen bg-gradient-to-r from-[#65CB9A] to-[#15D0DC] md:px-5 p-3">
+        <div className="flex-1 min-h-screen max-w-9xl bg-gradient-to-r from-[#65CB9A] to-[#15D0DC] px-1 overflow-hidden flex-wrap">
             <Nav />
-            <h1 className="py-2 pl-5 text-white font-semibold text-3xl">Favorieten</h1>
-            <div className="flex-1 flex flex-col mx-4 md:mx-3 md:space-y-4">
+            <h1 className="py-6 pl-5 text-white font-bold text-3xl">Favorieten</h1>
+            <div className="w-full">
                 {loading ? (
                     <Loading />
                 ) : pokemons.length > 0 ? (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 m-3 md:">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 m-1">
                         {pokemons.map((pokemon: Pokemon) => {
                             return <PokemonCard pokemon={pokemon} id={pokemon.id} />;
                         })}

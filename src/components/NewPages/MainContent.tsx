@@ -10,14 +10,13 @@ export interface PokedexProps {
 
 const MainContent = ({ loading, pokemonList }: PokedexProps) => {
     return (
-        <div>
+        <div className="w-full">
             {loading ? (
                 <Loading />
             ) : (
-                    <div className="space-y-4">
-                    {
-                        pokemonList.map((pokemon: PokemonDetailInfo, idx: number) => {
-                        return <PokemonCard key={idx+1} pokemon={pokemon} id={pokemon.id} />;
+                <div className="flex flex-col space-y-3">
+                    {pokemonList.map((pokemon: PokemonDetailInfo, idx: number) => {
+                        return <PokemonCard key={idx + 1} pokemon={pokemon} id={pokemon.id} />;
                     })}
                 </div>
             )}
